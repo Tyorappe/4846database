@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NGT48の劇場公演、メンバー情報、ランキング、イベント日程、便利ツールをまとめたデータサイトです。">
+  <title>4846 DATABASE | NGT48 DATA & TOOLS</title>
+  <style>
+    :root {
+      --bg: #f5f6f8;
+      --surface: #ffffff;
+      --text: #20242b;
+      --muted: #68717d;
+      --line: #e3e6eb;
+      --accent: #a71936;
+      --accent-dark: #7f1028;
+      --soft: #f8edf0;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", sans-serif;
+      line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+    .site-header {
+      background: #17191e;
+      color: #fff;
+      border-bottom: 3px solid var(--accent);
+    }
+    .header-inner, main, .footer-inner {
+      width: min(1100px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+    .header-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand { font-weight: 800; letter-spacing: .08em; font-size: 1.08rem; }
+    .brand span { color: #f0a9b8; }
+    nav { display: flex; gap: 22px; flex-wrap: wrap; }
+    nav a { color: #e3e5e9; font-size: .9rem; }
+    nav a:hover { color: #fff; }
+    .hero {
+      background: linear-gradient(120deg, #252831, #471526);
+      color: white;
+      padding: 76px 24px 72px;
+    }
+    .hero-inner { width: min(1100px, 100%); margin: 0 auto; }
+    .eyebrow {
+      color: #f0a9b8;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .18em;
+      margin: 0 0 14px;
+    }
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.2; margin: 0; letter-spacing: .03em; }
+    .hero p { color: #e3d9dd; max-width: 650px; margin: 20px 0 0; }
+    .hero-rule { width: 58px; height: 4px; background: #d44c6b; margin-top: 28px; }
+    main { padding: 48px 0 72px; }
+    .section-heading { margin-bottom: 22px; }
+    .section-heading .eyebrow { color: var(--accent); margin-bottom: 4px; }
+    h2 { font-size: 1.55rem; margin: 0; }
+    .section-description { color: var(--muted); margin: 6px 0 0; font-size: .94rem; }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 22px;
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: #d6a0ad;
+      box-shadow: 0 8px 24px rgba(24, 28, 36, .07);
+    }
+    .card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .card-icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      display: grid; place-items: center;
+      background: var(--soft); color: var(--accent);
+      font-size: 1.2rem; font-weight: 800;
+    }
+    .status {
+      color: var(--muted); background: #f0f1f3;
+      border-radius: 999px; padding: 3px 10px; font-size: .72rem;
+    }
+    .card h3 { margin: 14px 0 4px; font-size: 1.12rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .9rem; }
+    .card .arrow { color: var(--accent); font-size: .85rem; font-weight: 700; margin-top: auto; padding-top: 12px; }
+    .tools-section { margin-top: 52px; }
+    .tool-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 22px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .tool-card h3 { margin: 0 0 4px; }
+    .tool-card p { margin: 0; color: var(--muted); font-size: .9rem; }
+    .tool-link {
+      flex-shrink: 0; background: var(--accent); color: #fff;
+      padding: 10px 16px; border-radius: 7px; font-size: .88rem; font-weight: 700;
+    }
+    .tool-link:hover { background: var(--accent-dark); }
+    .notice {
+      margin-top: 28px; padding: 16px 18px; border-radius: 9px;
+      background: #fff; border: 1px solid var(--line);
+      color: var(--muted); font-size: .86rem;
+    }
+    footer { background: #17191e; color: #aeb4bd; padding: 24px 0; font-size: .8rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    @media (max-width: 650px) {
+      .header-inner { align-items: flex-start; flex-direction: column; padding: 16px 0; gap: 10px; }
+      nav { gap: 12px 18px; }
+      .hero { padding: 56px 20px; }
+      .card-grid { grid-template-columns: 1fr; }
+      .tool-card { align-items: flex-start; flex-direction: column; }
+      .tool-link { width: 100%; text-align: center; }
+      main { padding-top: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./">4846 <span>DATABASE</span></a>
+      <nav aria-label="メインナビゲーション">
+        <a href="#data">データ一覧</a>
+        <a href="#tools">便利ツール</a>
+        <a href="#about">このサイトについて</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">NGT48 DATA &amp; TOOLS</p>
+      <h1>NGT48を、データで楽しむ。</h1>
+      <p>劇場公演の出演記録、メンバー情報、各種ランキング、イベント日程など、NGT48に関するデータやツールをまとめていくファンサイトです。</p>
+      <div class="hero-rule"></div>
+    </div>
+  </section>
+
+  <main>
+    <section id="data">
+      <div class="section-heading">
+        <p class="eyebrow">DATABASE</p>
+        <h2>データ一覧</h2>
+        <p class="section-description">各カテゴリから情報を確認できます。ページは順次追加予定です。</p>
+      </div>
+
+      <div class="card-grid">
+        <a class="card" href="#" aria-label="劇場公演データ・準備中">
+          <div class="card-top"><div class="card-icon">公</div><span class="status">準備中</span></div>
+          <h3>劇場公演データ</h3>
+          <p>公演出演メンバー、出演回数、公演履歴などを掲載予定。</p>
+          <span class="arrow">ページ準備中 →</span>
+        </a>
+        <a class="card" href="#" aria-label="メンバー情報・準備中">
+          <div class="card-top"><div class="card-icon">人</div><span class="status">準備中</span></div>
+          <h3>メンバー情報</h3>
+          <p>メンバープロフィール、加入期、活動に関する情報などを掲載予定。</p>
+          <span class="arrow">ページ準備中 →</span>
+        </a>
+        <a class="card" href="#" aria-label="各種ランキング・準備中">
+          <div class="card-top"><div class="card-icon">順</div><span class="status">準備中</span></div>
+          <h3>各種ランキング</h3>
+          <p>劇場公演出演数や活動記録など、独自集計のランキングを掲載予定。</p>
+          <span class="arrow">ページ準備中 →</span>
+        </a>
+        <a class="card" href="#" aria-label="イベント日程・準備中">
+          <div class="card-top"><div class="card-icon">日</div><span class="status">準備中</span></div>
+          <h3>イベント日程</h3>
+          <p>握手会、対面イベント、リリースイベントなどを掲載予定。</p>
+          <span class="arrow">ページ準備中 →</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="tools-section" id="tools">
+      <div class="section-heading">
+        <p class="eyebrow">TOOLS</p>
+        <h2>便利ツール</h2>
+        <p class="section-description">制作したツールへの入口です。</p>
+      </div>
+      <div class="tool-card">
+        <div>
+          <h3>「シアターの女神」ポジション自動割り当て</h3>
+          <p>既存のNGT48ポジションツール。総合HPとは別のリポジトリで管理しています。</p>
+        </div>
+        <a class="tool-link" href="https://github.com/Tyorappe/NGT48-position-tool" target="_blank" rel="noopener noreferrer">ツールのリポジトリへ ↗</a>
+      </div>
+    </section>
+
+    <section class="tools-section" id="about">
+      <div class="section-heading">
+        <p class="eyebrow">ABOUT</p>
+        <h2>このサイトについて</h2>
+      </div>
+      <div class="notice">
+        このサイトはNGT48に関する情報を個人で整理・集計し、閲覧しやすくまとめることを目的としています。掲載内容は順次更新していきます。
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>4846 DATABASE</span>
+      <span>Unofficial fan-made data site</span>
+    </div>
+  </footer>
+</body>
+</html>
